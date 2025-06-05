@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   root: './src',
   base: '/skyrim-control-mapper',
+  publicDir: '../public',
   build: {
     outDir: '../dist',
     emptyOutDir: true,
