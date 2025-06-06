@@ -2,9 +2,9 @@ import React from 'react'
 import { createRoot } from 'react-dom/client';
 import { Button } from '@mui/material';
 import { BindingFile, BindingGroup, BindingValue, Binding, StoredState } from './types';
-import { parseBindingFile, parseNumber } from './utils/parseUtils';
-import { mouseCodes, gamepadCodes, keyboardCodes, codes, standardFileHeader, LOCAL_STORAGE_KEY, DEFAULTS_KEYS } from './constants';
-import { printBindingFile, printBindingGroup, formatBindingValue, formatNumber, formatBoolean, padColumnValue, getColumnTabCount, printColumns } from './utils/printUtils';
+import { parseBindingFile } from './utils/parseUtils';
+import { standardFileHeader, LOCAL_STORAGE_KEY, DEFAULTS_KEYS } from './constants';
+import { printBindingFile } from './utils/printUtils';
 import { setBit, getBit } from './utils/bitUtils';
 import { BindingValueCell } from './components/BindingValueCell';
 

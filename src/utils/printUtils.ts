@@ -1,5 +1,4 @@
 import { BindingFile, BindingGroup, BindingValue, Binding } from '../types';
-import { codes } from '../constants';
 
 export function printBindingFile(file: BindingFile) {
     return file.groups.flatMap(g => printBindingGroup(g)).join('\r\n')

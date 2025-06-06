@@ -1,6 +1,5 @@
 import { BindingValue, BindingGroup, Binding, BindingFile } from '../types';
 
-
 export function parseNumber(s: string): number {
     return s.startsWith('0x') ? parseInt(s.substring(2), 16) : parseInt(s, 10)
 }

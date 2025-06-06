@@ -1,4 +1,4 @@
-export const mouseCodes = {
+const mouseCodes = {
     'Mouse1': 0x0,
     'Mouse2': 0x1,
     'Mouse3': 0x2,
@@ -12,7 +12,7 @@ export const mouseCodes = {
     'MouseMove': 0xa,
 }
 
-export const gamepadCodes = {
+const gamepadCodes = {
     'Up': 0x0001,
     'Down': 0x0002,
     'Left': 0x0004,
@@ -33,7 +33,7 @@ export const gamepadCodes = {
     '360_RS': 0x000c,
 }
 
-export const keyboardCodes = {
+const keyboardCodes = {
     'Esc': 0x01,
     '1': 0x02,
     '2': 0x03,
@@ -206,4 +206,4 @@ export const LOCAL_STORAGE_KEY = 'skyrim-control-mapper-file'
 export const DEFAULTS_KEYS = [
     'Skyrim AE 1.6.640',
     'Skyrim SE 1.5.97'
-] 
+]
