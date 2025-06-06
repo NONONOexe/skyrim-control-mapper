@@ -1,7 +1,20 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 import { UPLOAD_BUTTON_TEXT } from "../constants";
+
+const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+});
 
 interface UploadControlmapButtonProps {
     onUpload: (file: File | null | undefined) => Promise<void>;
@@ -12,18 +25,17 @@ export const UploadControlmapButton = ({
     onUpload,
     fileInputRef,
 }: UploadControlmapButtonProps) => {
-    const handleButtonClick = () => {
-        fileInputRef.current?.click();
-    };
-
     return (
         <Tooltip title="Upload your custom controlmap.txt file.">
-            <Button variant="contained" onClick={handleButtonClick}>
+            <Button
+                component="label"
+                variant="contained"
+                sx={{ minHeight: "40px", lineHeight: "normal", height: "40px" }}
+            >
                 {UPLOAD_BUTTON_TEXT}
-                <input
+                <VisuallyHiddenInput
                     type="file"
                     accept=".txt"
-                    hidden
                     onChange={async (e) => onUpload(e.target.files?.item(0))}
                     ref={fileInputRef}
                 />

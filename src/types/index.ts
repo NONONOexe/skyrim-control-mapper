@@ -37,3 +37,41 @@ export interface StoredState {
     mode: "kbm" | "pad" | "all";
     showFlags: boolean;
 }
+
+export interface UploadControlmapSectionProps {
+    onUpload: (file: File | null | undefined) => Promise<void>;
+    loadDefaults: (keyToLoad: string) => Promise<void>;
+    fileInputRef: React.RefObject<HTMLInputElement | null>;
+}
+
+export interface DownloadControlmapSectionProps {
+    file: BindingFile | null;
+    downloadUrl: string;
+}
+
+export interface ModifySettingsSectionProps {
+    file: BindingFile;
+    mode: StoredState["mode"];
+    setMode: (mode: StoredState["mode"]) => void;
+    showFlags: StoredState["showFlags"];
+    setShowFlags: (showFlags: StoredState["showFlags"]) => void;
+    aliases: Record<string, string[]>;
+    setBindingValue: (
+        type: CodeType,
+        value: BindingValue,
+        bindingIndex: number,
+        groupIndex: number
+    ) => void;
+    setRemappable: (
+        type: CodeType,
+        checked: boolean,
+        bindingIndex: number,
+        groupIndex: number
+    ) => void;
+    setFlagBit: (
+        bit: number,
+        checked: boolean,
+        bindingIndex: number,
+        groupIndex: number
+    ) => void;
+}

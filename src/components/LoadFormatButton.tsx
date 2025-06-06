@@ -20,7 +20,7 @@ export const LoadFormatButton = ({
             <Button
                 variant="contained"
                 onClick={() => loadDefaults(filename)}
-                sx={{ mt: 2, ml: 2 }}
+                sx={{ minHeight: "40px", lineHeight: "normal", height: "40px" }}
             >
                 {label}
             </Button>
