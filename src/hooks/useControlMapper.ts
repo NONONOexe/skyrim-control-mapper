@@ -159,12 +159,7 @@ export function useControlMapper() {
             {} as Record<string, string[]>
         ) ?? {};
 
-    const downloadUrl = React.useMemo(() => {
-        if (!file) {
-            return "data:,";
-        }
-        return "data:, " + printBindingFile(file);
-    }, [file]);
+    const downloadUrl = file ? "data:," + printBindingFile(file) : "data:,";
 
     return {
         file,

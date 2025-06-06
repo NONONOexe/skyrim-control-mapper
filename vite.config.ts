@@ -24,18 +24,22 @@ export default defineConfig(({ mode }) => {
                     short_name: "SCM",
                     description:
                         "Visual editor for Skyrim SE controlmap.txt files",
-                    start_url: "/skyrim-control-mapper/",
+                    start_url: isDev ? "/" : GITHUB_PAGES_BASE,
                     display: "standalone",
                     background_color: "#ffffff",
                     theme_color: "#2196f3",
                     icons: [
                         {
-                            src: "/skyrim-control-mapper/icons/icon-192x192.png",
+                            src: isDev
+                                ? "/icons/icon-192x192.png"
+                                : `${GITHUB_PAGES_BASE}icons/icon-192x192.png`,
                             sizes: "192x192",
                             type: "image/png",
                         },
                         {
-                            src: "/skyrim-control-mapper/icons/icon-512x512.png",
+                            src: isDev
+                                ? "/icons/icon-512x512.png"
+                                : `${GITHUB_PAGES_BASE}icons/icon-512x512.png`,
                             sizes: "512x512",
                             type: "image/png",
                         },
