@@ -9,9 +9,9 @@ import {
 import { parseBindingFile } from "../utils/parseUtils";
 import { setBit } from "../utils/bitUtils";
 import {
-    standardFileHeader,
     LOCAL_STORAGE_KEY,
-    DEFAULTS_KEYS,
+    DEFAULT_NEW_FORMAT_OPTION,
+    DEFAULT_OLD_FORMAT_OPTION,
 } from "../constants";
 import { printBindingFile } from "../utils/printUtils";
 
@@ -19,7 +19,9 @@ export function useControlMapper() {
     const [file, setFile] = React.useState<BindingFile | null>(null);
     const [mode, setMode] = React.useState<"kbm" | "pad" | "all">("pad");
     const [showFlags, setShowFlags] = React.useState(false);
-    const [defaultsKey, setDefaultsKey] = React.useState(DEFAULTS_KEYS[0]);
+    const [defaultsKey, setDefaultsKey] = React.useState(
+        DEFAULT_NEW_FORMAT_OPTION.value
+    );
 
     React.useEffect(() => {
         const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -47,18 +49,31 @@ export function useControlMapper() {
         setFile(file);
     };
 
-    const loadDefaults = async () => {
+    const loadDefaults = async (keyToLoad?: string) => {
         const assetBasePath = import.meta.env.DEV
             ? "/"
             : import.meta.env.BASE_URL;
         console.log(`import.meta.env.DEV: ${import.meta.env.DEV}`);
         console.log(`import.meta.env.BASE_URL: ${import.meta.env.BASE_URL}`);
-        const url = `${assetBasePath}defaults/${defaultsKey}.txt`;
+        const targetKey = keyToLoad ?? defaultsKey;
+        const allDefaultOptions = [
+            DEFAULT_NEW_FORMAT_OPTION,
+            DEFAULT_OLD_FORMAT_OPTION,
+        ];
+        const selectedOption = allDefaultOptions.find(
+            (option) => option.value === targetKey
+        );
+        if (!selectedOption) {
+            console.error("Selected default option not found.");
+            return;
+        }
+        const url = `${assetBasePath}defaults/${selectedOption.filename}.txt`;
         console.log(`Attempting to fetch URL: ${url}`);
         const res = await fetch(url);
         const text = await res.text();
-        const file = parseBindingFile(text, defaultsKey);
+        const file = parseBindingFile(text, selectedOption.filename);
         setFile(file);
+        setDefaultsKey(targetKey);
     };
 
     const setGroup = (g: Partial<BindingGroup>, i: number) => {
@@ -145,8 +160,10 @@ export function useControlMapper() {
         ) ?? {};
 
     const downloadUrl = React.useMemo(() => {
-        if (!file) return "";
-        return `data:,${encodeURIComponent(`${standardFileHeader}${printBindingFile(file)}`)}`;
+        if (!file) {
+            return "data:,";
+        }
+        return "data:, " + printBindingFile(file);
     }, [file]);
 
     return {

@@ -127,7 +127,7 @@ const keyboardCodes = {
     DIK_ABNT_C1: 0x73,
     DIK_CONVERT: 0x79,
     DIK_NOCONVERT: 0x7b,
-    "�": 0x7d,
+    DIK_OEM_7D: 0x7d,
     DIK_ABNT_C2: 0x7e,
     NumPadEqual: 0x8d,
     "Prev Track": 0x90,
@@ -203,4 +203,18 @@ export const standardFileHeader = `// 1st field: User event name.  DO NOT ALTER!
 
 export const LOCAL_STORAGE_KEY = "skyrim-control-mapper-file";
 
-export const DEFAULTS_KEYS = ["Skyrim AE 1.6.640", "Skyrim SE 1.5.97"];
+export const UPLOAD_BUTTON_TEXT = "Upload controlmap.txt";
+export const DOWNLOAD_BUTTON_TEXT = "Download controlmap.txt";
+export const LOAD_DEFAULTS_TEXT = "Load Defaults";
+
+export const DEFAULT_NEW_FORMAT_OPTION = {
+    label: "Skyrim AE 1.6.640 (New Format)",
+    value: "skyrim_ae_new_format",
+    filename: "Skyrim_AE_NewFormat",
+};
+
+export const DEFAULT_OLD_FORMAT_OPTION = {
+    label: "Skyrim SE 1.5.97 (Old Format)",
+    value: "skyrim_se_old_format",
+    filename: "Skyrim_SE_OldFormat",
+};

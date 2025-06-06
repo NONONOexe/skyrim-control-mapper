@@ -90,7 +90,7 @@ export function BindingValueCell({
 
     return (
         <>
-            <FormControl variant="standard" sx={{ minWidth: 100 }}>
+            <FormControl variant="standard">
                 <InputLabel id={`value-type-label-${type}`}>Type</InputLabel>
                 <Select
                     labelId={`value-type-label-${type}`}
@@ -106,7 +106,7 @@ export function BindingValueCell({
                 </Select>
             </FormControl>
             {v.type === "code" ? (
-                <FormControl variant="standard" sx={{ minWidth: 120, ml: 1 }}>
+                <FormControl variant="standard">
                     <InputLabel id={`code-value-label-${type}`}>
                         Code
                     </InputLabel>
@@ -127,7 +127,7 @@ export function BindingValueCell({
                 </FormControl>
             ) : null}
             {v.type === "alias" ? (
-                <FormControl variant="standard" sx={{ minWidth: 120, ml: 1 }}>
+                <FormControl variant="standard">
                     <InputLabel id={`alias-value-label-${type}`}>
                         Alias
                     </InputLabel>

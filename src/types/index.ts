@@ -15,6 +15,8 @@ export type BindingValue =
     | { type: "and"; and: BindingValue[] }
     | { type: "or"; or: BindingValue[] };
 
+export type CodeType = "keyboard" | "mouse" | "gamepad";
+
 export interface Binding {
     name: string;
     codes: {
