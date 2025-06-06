@@ -20,7 +20,7 @@ export function useControlMapper() {
     const [mode, setMode] = React.useState<"kbm" | "pad" | "all">("pad");
     const [showFlags, setShowFlags] = React.useState(false);
     const [defaultsKey, setDefaultsKey] = React.useState(
-        DEFAULT_NEW_FORMAT_OPTION.value
+        DEFAULT_NEW_FORMAT_OPTION.filename
     );
 
     React.useEffect(() => {
@@ -61,7 +61,7 @@ export function useControlMapper() {
             DEFAULT_OLD_FORMAT_OPTION,
         ];
         const selectedOption = allDefaultOptions.find(
-            (option) => option.value === targetKey
+            (option) => option.filename === targetKey
         );
         if (!selectedOption) {
             console.error("Selected default option not found.");
@@ -161,6 +161,8 @@ export function useControlMapper() {
 
     const downloadUrl = file ? "data:," + printBindingFile(file) : "data:,";
 
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+
     return {
         file,
         setFile,
@@ -179,5 +181,6 @@ export function useControlMapper() {
         setFlagBit,
         aliases,
         downloadUrl,
+        fileInputRef,
     };
 }

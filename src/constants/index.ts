@@ -209,12 +209,10 @@ export const LOAD_DEFAULTS_TEXT = "Load Defaults";
 
 export const DEFAULT_NEW_FORMAT_OPTION = {
     label: "Skyrim AE 1.6.640 (New Format)",
-    value: "skyrim_ae_new_format",
     filename: "Skyrim_AE_NewFormat",
 };
 
 export const DEFAULT_OLD_FORMAT_OPTION = {
     label: "Skyrim SE 1.5.97 (Old Format)",
-    value: "skyrim_se_old_format",
     filename: "Skyrim_SE_OldFormat",
 };

@@ -2,13 +2,8 @@ import { createRoot } from "react-dom/client";
 import { useControlMapper } from "./hooks/useControlMapper";
 import { DisplayControls } from "./components/DisplayControls";
 import { BindingTable } from "./components/BindingTable";
-import { UploadControlmapButton } from "./components/UploadControlmapButton";
-import { LoadFormatButton } from "./components/LoadFormatButton";
-import {
-    DEFAULT_NEW_FORMAT_OPTION,
-    DEFAULT_OLD_FORMAT_OPTION,
-} from "./constants";
 import { DownloadControlmapButton } from "./components/DownloadControlmapButton";
+import { InitialActionButtons } from "./components/InitialActionButtons";
 
 function App() {
     const {
@@ -19,6 +14,7 @@ function App() {
         setShowFlags,
         aliases,
         downloadUrl,
+        fileInputRef,
         onUpload,
         loadDefaults,
         setBindingValue,
@@ -28,14 +24,10 @@ function App() {
 
     return (
         <>
-            <UploadControlmapButton onUpload={onUpload} />
-            <LoadFormatButton
-                loadOption={DEFAULT_NEW_FORMAT_OPTION}
+            <InitialActionButtons
+                onUpload={onUpload}
                 loadDefaults={loadDefaults}
-            />
-            <LoadFormatButton
-                loadOption={DEFAULT_OLD_FORMAT_OPTION}
-                loadDefaults={loadDefaults}
+                fileInputRef={fileInputRef}
             />
             <DownloadControlmapButton file={file} downloadUrl={downloadUrl} />
             {file ? (

@@ -3,7 +3,6 @@ import { Button } from "@mui/material";
 
 interface LoadFormatOption {
     label: string;
-    value: string;
     filename: string;
 }
 
@@ -12,17 +11,18 @@ interface LoadFormatButtonProps {
     loadDefaults: (keyToLoad: string) => Promise<void>;
 }
 
-export const LoadFormatButton: React.FC<LoadFormatButtonProps> = ({
-    loadOption,
-    loadDefaults,
-}) => {
+export const LoadFormatButton = React.forwardRef<
+    HTMLButtonElement,
+    LoadFormatButtonProps
+>(({ loadOption, loadDefaults }, ref) => {
     return (
         <Button
             variant="contained"
-            onClick={async () => loadDefaults(loadOption.value)}
+            onClick={async () => loadDefaults(loadOption.filename)}
             sx={{ mt: 2, ml: 2 }}
+            ref={ref}
         >
             {loadOption.label}
         </Button>
     );
-};
+});
