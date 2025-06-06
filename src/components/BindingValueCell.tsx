@@ -2,7 +2,10 @@ import React from "react";
 import { BindingValue } from "../types";
 import { codes } from "../constants";
 import { parseNumber } from "../utils/parseUtils";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 export function BindingValueCell({
     v,
@@ -95,7 +98,9 @@ export function BindingValueCell({
                 <Select
                     labelId={`value-type-label-${type}`}
                     value={v.type}
-                    onChange={(e) => onChangeType(e.target.value as string)}
+                    onChange={(e: SelectChangeEvent<string>) =>
+                        onChangeType(e.target.value as string)
+                    }
                     label="Type"
                 >
                     <MenuItem value="none">None</MenuItem>
@@ -113,7 +118,7 @@ export function BindingValueCell({
                     <Select
                         labelId={`code-value-label-${type}`}
                         value={String(v.code)}
-                        onChange={(e) =>
+                        onChange={(e: SelectChangeEvent<string>) =>
                             onChangeCode(parseNumber(e.target.value as string))
                         }
                         label="Code"
@@ -134,7 +139,7 @@ export function BindingValueCell({
                     <Select
                         labelId={`alias-value-label-${type}`}
                         value={v.alias}
-                        onChange={(e) =>
+                        onChange={(e: SelectChangeEvent<string>) =>
                             onChangeAlias(e.target.value as string)
                         }
                         label="Alias"

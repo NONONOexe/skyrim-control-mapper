@@ -1,11 +1,12 @@
 import React from "react";
-import { Typography, Paper, Box, Tooltip } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import { UploadControlmapButton } from "./UploadControlmapButton";
 import { LoadFormatButton } from "./LoadFormatButton";
 import {
     DEFAULT_NEW_FORMAT_OPTION,
     DEFAULT_OLD_FORMAT_OPTION,
-    UPLOAD_BUTTON_TEXT,
 } from "../constants";
 
 interface InitialActionButtonsProps {
@@ -25,24 +26,22 @@ export const InitialActionButtons: React.FC<InitialActionButtonsProps> = ({
                 1. Get Started with Your Control Map File
             </Typography>
             <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-                <Tooltip title="Upload your custom controlmap.txt file.">
-                    <UploadControlmapButton
-                        onUpload={onUpload}
-                        fileInputRef={fileInputRef}
-                    />
-                </Tooltip>
-                <Tooltip title="Load the default settings for Skyrim AE (New Format) version 1.6.640 and later.">
-                    <LoadFormatButton
-                        loadOption={DEFAULT_NEW_FORMAT_OPTION}
-                        loadDefaults={loadDefaults}
-                    />
-                </Tooltip>
-                <Tooltip title="Load the default settings for Skyrim SE (Old Format) version 1.5.97 and earlier.">
-                    <LoadFormatButton
-                        loadOption={DEFAULT_OLD_FORMAT_OPTION}
-                        loadDefaults={loadDefaults}
-                    />
-                </Tooltip>
+                <UploadControlmapButton
+                    onUpload={onUpload}
+                    fileInputRef={fileInputRef}
+                />
+                <LoadFormatButton
+                    loadDefaults={loadDefaults}
+                    label={DEFAULT_NEW_FORMAT_OPTION.label}
+                    filename={DEFAULT_NEW_FORMAT_OPTION.filename}
+                    tooltip="Load the default settings for Skyrim AE (New Format) version 1.6.640 and later."
+                />
+                <LoadFormatButton
+                    loadDefaults={loadDefaults}
+                    label={DEFAULT_OLD_FORMAT_OPTION.label}
+                    filename={DEFAULT_OLD_FORMAT_OPTION.filename}
+                    tooltip="Load the default settings for Skyrim SE (Old Format) version 1.5.97 and earlier."
+                />
             </Box>
         </Paper>
     );

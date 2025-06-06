@@ -1,28 +1,29 @@
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 import React from "react";
-import { Button } from "@mui/material";
-
-interface LoadFormatOption {
-    label: string;
-    filename: string;
-}
 
 interface LoadFormatButtonProps {
-    loadOption: LoadFormatOption;
-    loadDefaults: (keyToLoad: string) => Promise<void>;
+    loadDefaults: (filename: string) => void;
+    label: string;
+    filename: string;
+    tooltip: string;
 }
 
-export const LoadFormatButton = React.forwardRef<
-    HTMLButtonElement,
-    LoadFormatButtonProps
->(({ loadOption, loadDefaults }, ref) => {
+export const LoadFormatButton = ({
+    loadDefaults,
+    label,
+    filename,
+    tooltip,
+}: LoadFormatButtonProps) => {
     return (
-        <Button
-            variant="contained"
-            onClick={async () => loadDefaults(loadOption.filename)}
-            sx={{ mt: 2, ml: 2 }}
-            ref={ref}
-        >
-            {loadOption.label}
-        </Button>
+        <Tooltip title={tooltip}>
+            <Button
+                variant="contained"
+                onClick={() => loadDefaults(filename)}
+                sx={{ mt: 2, ml: 2 }}
+            >
+                {label}
+            </Button>
+        </Tooltip>
     );
-});
+};

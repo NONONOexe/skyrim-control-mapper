@@ -1,14 +1,12 @@
 import React from "react";
-import {
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Paper,
-    Checkbox,
-} from "@mui/material";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
 import { BindingFile, CodeType, BindingValue } from "../types";
 import { BindingValueCell } from "./BindingValueCell";
 import { getBit } from "../utils/bitUtils";
@@ -204,110 +202,27 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                                                     }
                                                 />
                                             </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 0)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            0,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 1)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            1,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 2)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            2,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 3)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            3,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 4)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            4,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 5)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            5,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 6)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            6,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={getBit(b.flags, 7)}
-                                                    onChange={(e) =>
-                                                        setFlagBit(
-                                                            7,
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
+                                            {Array.from({ length: 8 }).map(
+                                                (_, bitIndex) => (
+                                                    <TableCell key={bitIndex}>
+                                                        <Checkbox
+                                                            checked={getBit(
+                                                                b.flags,
+                                                                bitIndex
+                                                            )}
+                                                            onChange={(e) =>
+                                                                setFlagBit(
+                                                                    bitIndex,
+                                                                    e.target
+                                                                        .checked,
+                                                                    j,
+                                                                    i
+                                                                )
+                                                            }
+                                                        />
+                                                    </TableCell>
+                                                )
+                                            )}
                                         </>
                                     ) : null}
                                 </TableRow>
