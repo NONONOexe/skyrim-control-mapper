@@ -2,6 +2,7 @@ import React from 'react';
 import { BindingValue } from '../types';
 import { codes } from '../constants';
 import { parseNumber } from '../utils/parseUtils'; // parseNumber も必要になります
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 export function BindingValueCell({ v, type, aliases, onChange }: { v: BindingValue, type: 'keyboard' | 'mouse' | 'gamepad', aliases: Record<string, string[]>, onChange: (v: BindingValue) => void }) {
 
@@ -94,27 +95,55 @@ export function BindingValueCell({ v, type, aliases, onChange }: { v: BindingVal
     }
 
     return <>
-        <select value={v.type} onChange={e => onChangeType(e.target.value)}>
-            <option value="none">None</option>
-            <option value="code">Code</option>
-            <option value="alias">Alias</option>
-            <option value="and">All Of</option>
-            <option value="or">Any Of</option>
-        </select>
-        {v.type === 'code' ? <select value={v.code} onChange={e => onChangeCode(parseNumber(e.target.value))}>
-            {Object.entries(codes[type]).map(([key, value]) => <option value={value} key={value}>{key}</option>)}
-        </select> : null}
-        {v.type === 'alias' ? <select value={v.alias} onChange={e => onChangeAlias(e.target.value)}>
-            {Object.keys(aliases).map(k => <optgroup key={k} label={k}>{aliases[k].map(a => <option key={a}>{a}</option>)}</optgroup>)}
-        </select> : null}
-        {v.type === 'and' ? <>
+        <FormControl variant="standard" sx={{ minWidth: 100 }}>
+            <InputLabel id={`value-type-label-${type}`}>Type</InputLabel>
+            <Select
+                labelId={`value-type-label-${type}`}
+                value={v.type}
+                onChange={e => onChangeType(e.target.value as string)}
+                label="Type"
+            >
+                <MenuItem value="none">None</MenuItem>
+                <MenuItem value="code">Code</MenuItem>
+                <MenuItem value="alias">Alias</MenuItem>
+                <MenuItem value="and">All Of</MenuItem>
+                <MenuItem value="or">Any Of</MenuItem>
+            </Select>
+        </FormControl>
+        {v.type === 'code' ? (
+            <FormControl variant="standard" sx={{ minWidth: 120, ml: 1 }}>
+                <InputLabel id={`code-value-label-${type}`}>Code</InputLabel>
+                <Select
+                    labelId={`code-value-label-${type}`}
+                    value={String(v.code)}
+                    onChange={e => onChangeCode(parseNumber(e.target.value as string))}
+                    label="Code"
+                >
+                    {Object.entries(codes[type]).map(([key, value]) => <MenuItem value={String(value)} key={value}>{key}</MenuItem>)}
+                </Select>
+            </FormControl>
+        ) : null}
+        {v.type === 'alias' ? (
+            <FormControl variant="standard" sx={{ minWidth: 120, ml: 1 }}>
+                <InputLabel id={`alias-value-label-${type}`}>Alias</InputLabel>
+                <Select
+                    labelId={`alias-value-label-${type}`}
+                    value={v.alias}
+                    onChange={e => onChangeAlias(e.target.value as string)}
+                    label="Alias"
+                >
+                    {Object.keys(aliases).map(k => <optgroup key={k} label={k}>{aliases[k].map(a => <MenuItem key={a}>{a}</MenuItem>)}</optgroup>)}
+                </Select>
+            </FormControl>
+        ) : null}
+        {v.type === 'and' ? <> 
             ({v.and.map((o, i) => <React.Fragment key={i}>
             {i > 0 ? <>,&nbsp;</> : null}
             <BindingValueCell v={o} type={type} aliases={aliases} onChange={o => onChangeAnd(o, i)} />
             <button onClick={() => onDeleteAnd(i)}>x</button>
         </React.Fragment>)}, <button onClick={() => onAppendAnd()}>+</button>)
         </> : null}
-        {v.type === 'or' ? <>
+        {v.type === 'or' ? <> 
             ({v.or.map((o, i) => <React.Fragment key={i}>
             {i > 0 ? <>,&nbsp;</> : null}
             <BindingValueCell v={o} type={type} aliases={aliases} onChange={o => onChangeOr(o, i)} />
