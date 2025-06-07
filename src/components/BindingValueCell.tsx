@@ -6,6 +6,10 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import Box from "@mui/material/Box";
 
 export function BindingValueCell({
     v,
@@ -92,16 +96,23 @@ export function BindingValueCell({
     };
 
     return (
-        <>
-            <FormControl variant="standard">
-                <InputLabel id={`value-type-label-${type}`}>Type</InputLabel>
+        <Box sx={{ display: "flex", alignItems: "center", flexWrap: "nowrap" }}>
+            <FormControl
+                variant="standard"
+                sx={{
+                    minWidth: 0,
+                    whiteSpace: "nowrap",
+                    marginRight: 1,
+                    flexShrink: 1,
+                    flexGrow: 0,
+                }}
+            >
                 <Select
-                    labelId={`value-type-label-${type}`}
                     value={v.type}
                     onChange={(e: SelectChangeEvent<string>) =>
                         onChangeType(e.target.value as string)
                     }
-                    label="Type"
+                    sx={{ minWidth: 0 }}
                 >
                     <MenuItem value="none">None</MenuItem>
                     <MenuItem value="code">Code</MenuItem>
@@ -111,17 +122,22 @@ export function BindingValueCell({
                 </Select>
             </FormControl>
             {v.type === "code" ? (
-                <FormControl variant="standard">
-                    <InputLabel id={`code-value-label-${type}`}>
-                        Code
-                    </InputLabel>
+                <FormControl
+                    variant="standard"
+                    sx={{
+                        minWidth: 0,
+                        whiteSpace: "nowrap",
+                        marginRight: 1,
+                        flexShrink: 1,
+                        flexGrow: 0,
+                    }}
+                >
                     <Select
-                        labelId={`code-value-label-${type}`}
                         value={String(v.code)}
                         onChange={(e: SelectChangeEvent<string>) =>
                             onChangeCode(parseNumber(e.target.value as string))
                         }
-                        label="Code"
+                        sx={{ minWidth: 0 }}
                     >
                         {Object.entries(codes[type]).map(([key, value]) => (
                             <MenuItem value={String(value)} key={value}>
@@ -132,33 +148,65 @@ export function BindingValueCell({
                 </FormControl>
             ) : null}
             {v.type === "alias" ? (
-                <FormControl variant="standard">
-                    <InputLabel id={`alias-value-label-${type}`}>
-                        Alias
-                    </InputLabel>
+                <FormControl
+                    variant="standard"
+                    sx={{
+                        minWidth: 0,
+                        whiteSpace: "nowrap",
+                        marginRight: 1,
+                        flexShrink: 1,
+                        flexGrow: 0,
+                    }}
+                >
                     <Select
-                        labelId={`alias-value-label-${type}`}
                         value={v.alias}
                         onChange={(e: SelectChangeEvent<string>) =>
                             onChangeAlias(e.target.value as string)
                         }
-                        label="Alias"
+                        sx={{ minWidth: 0 }}
                     >
-                        {Object.keys(aliases).map((k) => (
-                            <optgroup key={k} label={k}>
-                                {aliases[k].map((a) => (
-                                    <MenuItem key={a}>{a}</MenuItem>
-                                ))}
-                            </optgroup>
-                        ))}
+                        {Object.keys(aliases).map((k) => [
+                            <MenuItem
+                                key={k}
+                                disabled
+                                sx={{ fontWeight: "bold" }}
+                            >
+                                {k}
+                            </MenuItem>,
+                            ...aliases[k].map((a) => (
+                                <MenuItem key={a} value={a}>
+                                    {a}
+                                </MenuItem>
+                            )),
+                        ])}
                     </Select>
                 </FormControl>
             ) : null}
             {v.type === "and" ? (
-                <>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "nowrap",
+                        whiteSpace: "nowrap",
+                        marginRight: 1,
+                        flexShrink: 1,
+                        flexGrow: 0,
+                    }}
+                >
                     (
                     {v.and.map((o, i) => (
-                        <React.Fragment key={i}>
+                        <Box
+                            key={i}
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                whiteSpace: "nowrap",
+                                marginRight: 1,
+                                flexShrink: 1,
+                                flexGrow: 0,
+                            }}
+                        >
                             {i > 0 ? <>,&nbsp;</> : null}
                             <BindingValueCell
                                 v={o}
@@ -166,17 +214,47 @@ export function BindingValueCell({
                                 aliases={aliases}
                                 onChange={(o) => onChangeAnd(o, i)}
                             />
-                            <button onClick={() => onDeleteAnd(i)}>x</button>
-                        </React.Fragment>
+                            <IconButton
+                                onClick={() => onDeleteAnd(i)}
+                                size="small"
+                                sx={{ marginRight: 1 }}
+                            >
+                                <RemoveCircleOutlineIcon fontSize="small" />
+                            </IconButton>
+                        </Box>
                     ))}
-                    , <button onClick={() => onAppendAnd()}>+</button>)
-                </>
+                    ,{" "}
+                    <IconButton onClick={() => onAppendAnd()} size="small">
+                        <AddCircleOutlineIcon fontSize="small" />
+                    </IconButton>
+                    )
+                </Box>
             ) : null}
             {v.type === "or" ? (
-                <>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "nowrap",
+                        whiteSpace: "nowrap",
+                        marginRight: 1,
+                        flexShrink: 1,
+                        flexGrow: 0,
+                    }}
+                >
                     (
                     {v.or.map((o, i) => (
-                        <React.Fragment key={i}>
+                        <Box
+                            key={i}
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                whiteSpace: "nowrap",
+                                marginRight: 1,
+                                flexShrink: 1,
+                                flexGrow: 0,
+                            }}
+                        >
                             {i > 0 ? <>,&nbsp;</> : null}
                             <BindingValueCell
                                 v={o}
@@ -184,12 +262,22 @@ export function BindingValueCell({
                                 aliases={aliases}
                                 onChange={(o) => onChangeOr(o, i)}
                             />
-                            <button onClick={() => onDeleteOr(i)}>x</button>
-                        </React.Fragment>
+                            <IconButton
+                                onClick={() => onDeleteOr(i)}
+                                size="small"
+                                sx={{ marginRight: 1 }}
+                            >
+                                <RemoveCircleOutlineIcon fontSize="small" />
+                            </IconButton>
+                        </Box>
                     ))}
-                    , <button onClick={() => onAppendOr()}>+</button>)
-                </>
+                    ,{" "}
+                    <IconButton onClick={() => onAppendOr()} size="small">
+                        <AddCircleOutlineIcon fontSize="small" />
+                    </IconButton>
+                    )
+                </Box>
             ) : null}
-        </>
+        </Box>
     );
 }
