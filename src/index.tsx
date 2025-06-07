@@ -23,47 +23,51 @@ function App() {
     } = useControlMapper();
 
     return (
-        <div style={{ paddingTop: "50px" }}>
+        <div>
             <Header />
-            <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-                <h2>1. Upload Configuration File / Select Default Data</h2>
-                <UploadControlmapSection
-                    onUpload={onUpload}
-                    loadDefaults={loadDefaults}
-                    fileInputRef={fileInputRef}
-                />
-            </div>
+            <div style={{ margin: "0 10%", paddingTop: "60px" }}>
+                <div
+                    style={{ padding: "10px", borderBottom: "1px solid #ccc" }}
+                >
+                    <h2>1. Upload Configuration File / Select Default Data</h2>
+                    <UploadControlmapSection
+                        onUpload={onUpload}
+                        loadDefaults={loadDefaults}
+                        fileInputRef={fileInputRef}
+                    />
+                </div>
 
-            {file ? (
-                <>
-                    <div
-                        style={{
-                            padding: "10px",
-                            borderBottom: "1px solid #ccc",
-                        }}
-                    >
-                        <h2>2. Modify Settings</h2>
-                        <ModifySettingsSection
-                            file={file}
-                            mode={mode}
-                            setMode={setMode}
-                            showFlags={showFlags}
-                            setShowFlags={setShowFlags}
-                            aliases={aliases}
-                            setBindingValue={setBindingValue}
-                            setRemappable={setRemappable}
-                            setFlagBit={setFlagBit}
-                        />
-                    </div>
-                    <div style={{ padding: "10px" }}>
-                        <h2>3. Download Modified Configuration File</h2>
-                        <DownloadControlmapSection
-                            file={file}
-                            downloadUrl={downloadUrl}
-                        />
-                    </div>
-                </>
-            ) : null}
+                {file ? (
+                    <>
+                        <div
+                            style={{
+                                padding: "10px",
+                                borderBottom: "1px solid #ccc",
+                            }}
+                        >
+                            <h2>2. Modify Settings</h2>
+                            <ModifySettingsSection
+                                file={file}
+                                mode={mode}
+                                setMode={setMode}
+                                showFlags={showFlags}
+                                setShowFlags={setShowFlags}
+                                aliases={aliases}
+                                setBindingValue={setBindingValue}
+                                setRemappable={setRemappable}
+                                setFlagBit={setFlagBit}
+                            />
+                        </div>
+                        <div style={{ padding: "10px" }}>
+                            <h2>3. Download Modified Configuration File</h2>
+                            <DownloadControlmapSection
+                                file={file}
+                                downloadUrl={downloadUrl}
+                            />
+                        </div>
+                    </>
+                ) : null}
+            </div>
         </div>
     );
 }
