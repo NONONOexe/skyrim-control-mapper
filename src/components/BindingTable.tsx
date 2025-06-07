@@ -7,37 +7,30 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
-import { BindingFile, CodeType, BindingValue } from "../types";
+import { BindingFile, CodeType, BindingValue, BindingGroup } from "../types";
 import { BindingValueCell } from "./BindingValueCell";
 import { getBit } from "../utils/bitUtils";
 
 interface BindingTableProps {
-    file: BindingFile;
+    group: BindingGroup;
     mode: "kbm" | "pad" | "all";
     showFlags: boolean;
     aliases: Record<string, string[]>;
     setBindingValue: (
         type: CodeType,
         value: BindingValue,
-        bindingIndex: number,
-        groupIndex: number
+        bindingIndex: number
     ) => void;
     setRemappable: (
         type: CodeType,
         checked: boolean,
-        bindingIndex: number,
-        groupIndex: number
+        bindingIndex: number
     ) => void;
-    setFlagBit: (
-        bit: number,
-        checked: boolean,
-        bindingIndex: number,
-        groupIndex: number
-    ) => void;
+    setFlagBit: (bit: number, checked: boolean, bindingIndex: number) => void;
 }
 
 export const BindingTable: React.FC<BindingTableProps> = ({
-    file,
+    group,
     mode,
     showFlags,
     aliases,
@@ -46,8 +39,8 @@ export const BindingTable: React.FC<BindingTableProps> = ({
     setFlagBit,
 }) => {
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="binding table">
+        <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
+            <Table stickyHeader aria-label="binding table">
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
@@ -67,7 +60,7 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                         ) : null}
                     </TableRow>
                     <TableRow>
-                        <TableCell>Binding Group</TableCell>
+                        <TableCell></TableCell>
                         <TableCell>Binding Name</TableCell>
                         {mode === "all" || mode === "kbm" ? (
                             <>
@@ -98,136 +91,112 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {file.groups.map((g, i) => (
-                        <React.Fragment key={g.name}>
-                            {g.bindings.map((b, j) => (
-                                <TableRow key={g.name + "_" + b.name}>
-                                    <TableCell>{g.name}</TableCell>
-                                    <TableCell>{b.name}</TableCell>
-                                    {mode === "all" || mode === "kbm" ? (
-                                        <>
-                                            <TableCell>
-                                                <BindingValueCell
-                                                    v={b.codes.keyboard}
-                                                    type="keyboard"
-                                                    aliases={aliases}
-                                                    onChange={(v) =>
-                                                        setBindingValue(
-                                                            "keyboard",
-                                                            v,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <BindingValueCell
-                                                    v={b.codes.mouse}
-                                                    type="mouse"
-                                                    aliases={aliases}
-                                                    onChange={(v) =>
-                                                        setBindingValue(
-                                                            "mouse",
-                                                            v,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                        </>
-                                    ) : null}
-                                    {mode === "all" || mode === "pad" ? (
-                                        <>
-                                            <TableCell>
-                                                <BindingValueCell
-                                                    v={b.codes.gamepad}
-                                                    type="gamepad"
-                                                    aliases={aliases}
-                                                    onChange={(v) =>
-                                                        setBindingValue(
-                                                            "gamepad",
-                                                            v,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                        </>
-                                    ) : null}
-                                    {showFlags ? (
-                                        <>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={
-                                                        b.remappable.keyboard
-                                                    }
-                                                    onChange={(e) =>
-                                                        setRemappable(
-                                                            "keyboard",
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={b.remappable.mouse}
-                                                    onChange={(e) =>
-                                                        setRemappable(
-                                                            "mouse",
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Checkbox
-                                                    checked={
-                                                        b.remappable.gamepad
-                                                    }
-                                                    onChange={(e) =>
-                                                        setRemappable(
-                                                            "gamepad",
-                                                            e.target.checked,
-                                                            j,
-                                                            i
-                                                        )
-                                                    }
-                                                />
-                                            </TableCell>
-                                            {Array.from({ length: 8 }).map(
-                                                (_, bitIndex) => (
-                                                    <TableCell key={bitIndex}>
-                                                        <Checkbox
-                                                            checked={getBit(
-                                                                b.flags,
-                                                                bitIndex
-                                                            )}
-                                                            onChange={(e) =>
-                                                                setFlagBit(
-                                                                    bitIndex,
-                                                                    e.target
-                                                                        .checked,
-                                                                    j,
-                                                                    i
-                                                                )
-                                                            }
-                                                        />
-                                                    </TableCell>
+                    {group.bindings.map((b, j) => (
+                        <TableRow key={group.name + "_" + b.name}>
+                            <TableCell></TableCell>
+                            <TableCell>{b.name}</TableCell>
+                            {mode === "all" || mode === "kbm" ? (
+                                <>
+                                    <TableCell>
+                                        <BindingValueCell
+                                            v={b.codes.keyboard}
+                                            type="keyboard"
+                                            aliases={aliases}
+                                            onChange={(v) =>
+                                                setBindingValue(
+                                                    "keyboard",
+                                                    v,
+                                                    j
                                                 )
-                                            )}
-                                        </>
-                                    ) : null}
-                                </TableRow>
-                            ))}
-                        </React.Fragment>
+                                            }
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <BindingValueCell
+                                            v={b.codes.mouse}
+                                            type="mouse"
+                                            aliases={aliases}
+                                            onChange={(v) =>
+                                                setBindingValue("mouse", v, j)
+                                            }
+                                        />
+                                    </TableCell>
+                                </>
+                            ) : null}
+                            {mode === "all" || mode === "pad" ? (
+                                <>
+                                    <TableCell>
+                                        <BindingValueCell
+                                            v={b.codes.gamepad}
+                                            type="gamepad"
+                                            aliases={aliases}
+                                            onChange={(v) =>
+                                                setBindingValue("gamepad", v, j)
+                                            }
+                                        />
+                                    </TableCell>
+                                </>
+                            ) : null}
+                            {showFlags ? (
+                                <>
+                                    <TableCell>
+                                        <Checkbox
+                                            checked={b.remappable.keyboard}
+                                            onChange={(e) =>
+                                                setRemappable(
+                                                    "keyboard",
+                                                    e.target.checked,
+                                                    j
+                                                )
+                                            }
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Checkbox
+                                            checked={b.remappable.mouse}
+                                            onChange={(e) =>
+                                                setRemappable(
+                                                    "mouse",
+                                                    e.target.checked,
+                                                    j
+                                                )
+                                            }
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Checkbox
+                                            checked={b.remappable.gamepad}
+                                            onChange={(e) =>
+                                                setRemappable(
+                                                    "gamepad",
+                                                    e.target.checked,
+                                                    j
+                                                )
+                                            }
+                                        />
+                                    </TableCell>
+                                    {Array.from({ length: 8 }).map(
+                                        (_, bitIndex) => (
+                                            <TableCell key={bitIndex}>
+                                                <Checkbox
+                                                    checked={getBit(
+                                                        b.flags,
+                                                        bitIndex
+                                                    )}
+                                                    onChange={(e) =>
+                                                        setFlagBit(
+                                                            bitIndex,
+                                                            e.target.checked,
+                                                            j
+                                                        )
+                                                    }
+                                                />
+                                            </TableCell>
+                                        )
+                                    )}
+                                </>
+                            ) : null}
+                        </TableRow>
                     ))}
                 </TableBody>
             </Table>

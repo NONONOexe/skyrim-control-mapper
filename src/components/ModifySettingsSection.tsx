@@ -1,6 +1,6 @@
 import React from "react";
 import { DisplayControls } from "./DisplayControls";
-import { BindingTable } from "./BindingTable";
+import { BindingTabs } from "./BindingTabs";
 import {
     BindingFile,
     StoredState,
@@ -28,7 +28,7 @@ export const ModifySettingsSection: React.FC<ModifySettingsSectionProps> = ({
                 showFlags={showFlags}
                 setShowFlags={setShowFlags}
             />
-            <BindingTable
+            <BindingTabs
                 file={file}
                 mode={mode}
                 showFlags={showFlags}
