@@ -36,6 +36,7 @@ export interface StoredState {
     file: BindingFile | null;
     mode: "kbm" | "pad" | "all";
     showFlags: boolean;
+    originalFileContent: string | null;
 }
 
 export interface UploadControlmapSectionProps {
@@ -47,6 +48,7 @@ export interface UploadControlmapSectionProps {
 export interface DownloadControlmapSectionProps {
     file: BindingFile | null;
     downloadUrl: string;
+    originalFileContent: string | null;
 }
 
 export interface ModifySettingsSectionProps {

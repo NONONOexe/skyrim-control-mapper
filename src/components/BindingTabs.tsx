@@ -23,7 +23,7 @@ function TabPanel(props: TabPanelProps) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box sx={{ height: "50vh" }}>{children}</Box>}
         </div>
     );
 }
@@ -77,23 +77,21 @@ export const BindingTabs: React.FC<BindingTabsProps> = ({
 
     return (
         <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="binding group tabs"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                >
-                    {file.groups.map((group, index) => (
-                        <Tab
-                            label={group.name}
-                            {...a11yProps(index)}
-                            key={group.name}
-                        />
-                    ))}
-                </Tabs>
-            </Box>
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="binding group tabs"
+                variant="scrollable"
+                scrollButtons="auto"
+            >
+                {file.groups.map((group, index) => (
+                    <Tab
+                        label={group.name}
+                        {...a11yProps(index)}
+                        key={group.name}
+                    />
+                ))}
+            </Tabs>
             {file.groups.map((group, index) => (
                 <TabPanel value={value} index={index} key={group.name}>
                     <BindingTable

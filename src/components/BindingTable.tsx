@@ -39,61 +39,135 @@ export const BindingTable: React.FC<BindingTableProps> = ({
     setFlagBit,
 }) => {
     return (
-        <TableContainer component={Paper} sx={{ maxHeight: 600 }}>
-            <Table stickyHeader aria-label="binding table">
+        <TableContainer
+            component={Paper}
+            sx={{ height: "100%", overflowY: "auto" }}
+        >
+            <Table stickyHeader sx={{ padding: "0 40px" }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
                         <TableCell
-                            colSpan={
-                                mode === "all" ? 3 : mode === "kbm" ? 2 : 1
-                            }
+                            sx={{
+                                fontWeight: "800",
+                                width: "100px",
+                                minWidth: "100px",
+                            }}
                         >
-                            Bindings
+                            Binding Name
                         </TableCell>
-                        {showFlags ? (
-                            <>
-                                <TableCell colSpan={3}>Remappable?</TableCell>
-                                <TableCell colSpan={8}>Flags</TableCell>
-                            </>
-                        ) : null}
-                    </TableRow>
-                    <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell>Binding Name</TableCell>
                         {mode === "all" || mode === "kbm" ? (
                             <>
-                                <TableCell>Keyboard</TableCell>
-                                <TableCell>Mouse</TableCell>
+                                <TableCell sx={{ fontWeight: "800" }}>
+                                    Keyboard
+                                </TableCell>
+                                <TableCell sx={{ fontWeight: "800" }}>
+                                    Mouse
+                                </TableCell>
                             </>
                         ) : null}
                         {mode === "all" || mode === "pad" ? (
                             <>
-                                <TableCell>Gamepad</TableCell>
+                                <TableCell sx={{ fontWeight: "800" }}>
+                                    Gamepad
+                                </TableCell>
                             </>
                         ) : null}
                         {showFlags ? (
                             <>
-                                <TableCell>Keyboard</TableCell>
-                                <TableCell>Mouse</TableCell>
-                                <TableCell>Gamepad</TableCell>
-                                <TableCell title="Movement">M*</TableCell>
-                                <TableCell title="Look">L*</TableCell>
-                                <TableCell title="Activate">A*</TableCell>
-                                <TableCell title="Interface">I*</TableCell>
-                                <TableCell title="Debug">D*</TableCell>
-                                <TableCell title="Zoom">Z*</TableCell>
-                                <TableCell title="Combat">C*</TableCell>
-                                <TableCell title="Sneak">S*</TableCell>
+                                <TableCell
+                                    align="center"
+                                    sx={{
+                                        fontWeight: "800",
+                                        width: "80px",
+                                        minWidth: "80px",
+                                    }}
+                                >
+                                    Keyboard
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    sx={{
+                                        fontWeight: "800",
+                                        width: "80px",
+                                        minWidth: "80px",
+                                    }}
+                                >
+                                    Mouse
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    sx={{
+                                        fontWeight: "800",
+                                        width: "80px",
+                                        minWidth: "80px",
+                                    }}
+                                >
+                                    Gamepad
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Movement"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    M*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Look"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    L*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Activate"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    A*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Interface"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    I*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Debug"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    D*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Zoom"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    Z*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Combat"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    C*
+                                </TableCell>
+                                <TableCell
+                                    align="center"
+                                    title="Sneak"
+                                    sx={{ fontWeight: "800" }}
+                                >
+                                    S*
+                                </TableCell>
                             </>
                         ) : null}
+                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {group.bindings.map((b, j) => (
                         <TableRow key={group.name + "_" + b.name}>
-                            <TableCell></TableCell>
                             <TableCell>{b.name}</TableCell>
                             {mode === "all" || mode === "kbm" ? (
                                 <>
@@ -139,7 +213,7 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                             ) : null}
                             {showFlags ? (
                                 <>
-                                    <TableCell>
+                                    <TableCell align="center">
                                         <Checkbox
                                             checked={b.remappable.keyboard}
                                             onChange={(e) =>
@@ -151,7 +225,7 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                                             }
                                         />
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell align="center">
                                         <Checkbox
                                             checked={b.remappable.mouse}
                                             onChange={(e) =>
@@ -163,7 +237,7 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                                             }
                                         />
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell align="center">
                                         <Checkbox
                                             checked={b.remappable.gamepad}
                                             onChange={(e) =>
@@ -177,7 +251,10 @@ export const BindingTable: React.FC<BindingTableProps> = ({
                                     </TableCell>
                                     {Array.from({ length: 8 }).map(
                                         (_, bitIndex) => (
-                                            <TableCell key={bitIndex}>
+                                            <TableCell
+                                                key={bitIndex}
+                                                align="center"
+                                            >
                                                 <Checkbox
                                                     checked={getBit(
                                                         b.flags,

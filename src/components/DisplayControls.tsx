@@ -5,6 +5,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
+import Stack from "@mui/material/Stack";
 
 interface DisplayControlsProps {
     mode: "kbm" | "pad" | "all";
@@ -20,9 +21,8 @@ export const DisplayControls: React.FC<DisplayControlsProps> = ({
     setShowFlags,
 }) => {
     return (
-        <>
+        <Stack direction="row" alignItems="center" spacing={2}>
             <FormControl component="fieldset">
-                <FormLabel component="legend">Show Bindings For:</FormLabel>
                 <RadioGroup
                     row
                     value={mode}
@@ -47,17 +47,15 @@ export const DisplayControls: React.FC<DisplayControlsProps> = ({
                     />
                 </RadioGroup>
             </FormControl>
-            <div>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={showFlags}
-                            onChange={(e) => setShowFlags(e.target.checked)}
-                        />
-                    }
-                    label="Show Other Flags"
-                />
-            </div>
-        </>
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={showFlags}
+                        onChange={(e) => setShowFlags(e.target.checked)}
+                    />
+                }
+                label="Show Other Flags"
+            />
+        </Stack>
     );
 };

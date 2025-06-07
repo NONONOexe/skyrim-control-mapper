@@ -27,11 +27,7 @@ export const UploadControlmapButton = ({
 }: UploadControlmapButtonProps) => {
     return (
         <Tooltip title="Upload your custom controlmap.txt file.">
-            <Button
-                component="label"
-                variant="contained"
-                sx={{ minHeight: "40px", lineHeight: "normal", height: "40px" }}
-            >
+            <Button component="label" variant="contained">
                 {UPLOAD_BUTTON_TEXT}
                 <VisuallyHiddenInput
                     type="file"

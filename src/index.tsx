@@ -1,11 +1,44 @@
+import React from "react";
 import { createRoot } from "react-dom/client";
-import { useControlMapper } from "./hooks/useControlMapper";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import Header from "./components/Header";
 import { UploadControlmapSection } from "./components/UploadControlmapSection";
 import { ModifySettingsSection } from "./components/ModifySettingsSection";
 import { DownloadControlmapSection } from "./components/DownloadControlmapSection";
-import Header from "./components/Header";
+import { useControlMapper } from "./hooks/useControlMapper";
+
+const theme = createTheme({
+    typography: {
+        h3: {
+            fontSize: "1.2rem",
+            fontWeight: 600,
+            color: "#555",
+        },
+    },
+});
 
 function App() {
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState("");
+
+    const handleCloseSnackbar = (
+        _event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
+    const onFileLoadSuccess = (filename: string) => {
+        setSnackbarMessage(`${filename} loaded successfully.`);
+        setOpenSnackbar(true);
+    };
+
     const {
         file,
         mode,
@@ -20,55 +53,54 @@ function App() {
         setBindingValue,
         setRemappable,
         setFlagBit,
+        originalFileContent,
     } = useControlMapper();
 
     return (
-        <div>
+        <ThemeProvider theme={theme}>
             <Header />
-            <div style={{ margin: "0 10%", paddingTop: "60px" }}>
-                <div
-                    style={{ padding: "10px", borderBottom: "1px solid #ccc" }}
-                >
-                    <h2>1. Upload Configuration File / Select Default Data</h2>
-                    <UploadControlmapSection
-                        onUpload={onUpload}
-                        loadDefaults={loadDefaults}
-                        fileInputRef={fileInputRef}
-                    />
-                </div>
-
+            <Stack sx={{ margin: "80px 10% 0 10%" }} spacing={4}>
+                <UploadControlmapSection
+                    onUpload={(f) => onUpload(f, onFileLoadSuccess)}
+                    loadDefaults={(key) => loadDefaults(key, onFileLoadSuccess)}
+                    fileInputRef={fileInputRef}
+                />
                 {file ? (
                     <>
-                        <div
-                            style={{
-                                padding: "10px",
-                                borderBottom: "1px solid #ccc",
-                            }}
-                        >
-                            <h2>2. Modify Settings</h2>
-                            <ModifySettingsSection
-                                file={file}
-                                mode={mode}
-                                setMode={setMode}
-                                showFlags={showFlags}
-                                setShowFlags={setShowFlags}
-                                aliases={aliases}
-                                setBindingValue={setBindingValue}
-                                setRemappable={setRemappable}
-                                setFlagBit={setFlagBit}
-                            />
-                        </div>
-                        <div style={{ padding: "10px" }}>
-                            <h2>3. Download Modified Configuration File</h2>
-                            <DownloadControlmapSection
-                                file={file}
-                                downloadUrl={downloadUrl}
-                            />
-                        </div>
+                        <ModifySettingsSection
+                            file={file}
+                            mode={mode}
+                            setMode={setMode}
+                            showFlags={showFlags}
+                            setShowFlags={setShowFlags}
+                            aliases={aliases}
+                            setBindingValue={setBindingValue}
+                            setRemappable={setRemappable}
+                            setFlagBit={setFlagBit}
+                        />
+                        <DownloadControlmapSection
+                            file={file}
+                            downloadUrl={downloadUrl}
+                            originalFileContent={originalFileContent}
+                        />
                     </>
                 ) : null}
-            </div>
-        </div>
+            </Stack>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <Alert
+                    onClose={handleCloseSnackbar}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+        </ThemeProvider>
     );
 }
 

@@ -17,11 +17,7 @@ export const LoadFormatButton = ({
 }: LoadFormatButtonProps) => {
     return (
         <Tooltip title={tooltip}>
-            <Button
-                variant="contained"
-                onClick={() => loadDefaults(filename)}
-                sx={{ minHeight: "40px", lineHeight: "normal", height: "40px" }}
-            >
+            <Button variant="contained" onClick={() => loadDefaults(filename)}>
                 {label}
             </Button>
         </Tooltip>

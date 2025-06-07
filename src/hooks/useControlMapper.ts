@@ -17,6 +17,9 @@ import { printBindingFile } from "../utils/printUtils";
 
 export function useControlMapper() {
     const [file, setFile] = React.useState<BindingFile | null>(null);
+    const [originalFileContent, setOriginalFileContent] = React.useState<
+        string | null
+    >(null);
     const [mode, setMode] = React.useState<"kbm" | "pad" | "all">("pad");
     const [showFlags, setShowFlags] = React.useState(false);
     const [defaultsKey, setDefaultsKey] = React.useState(
@@ -30,6 +33,7 @@ export function useControlMapper() {
             setFile(data.file);
             setMode(data.mode);
             setShowFlags(data.showFlags);
+            setOriginalFileContent(data.originalFileContent || null);
         }
     }, []);
 
@@ -38,18 +42,27 @@ export function useControlMapper() {
             file,
             mode,
             showFlags,
+            originalFileContent,
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
-    }, [file, mode, showFlags]);
+    }, [file, mode, showFlags, originalFileContent]);
 
-    const onUpload = async (f?: File | null) => {
+    const onUpload = async (
+        f?: File | null,
+        onFileLoadSuccess?: (filename: string) => void
+    ) => {
         const s = await f?.text();
         if (!f || !s) return;
         const file = parseBindingFile(s, f.name);
         setFile(file);
+        setOriginalFileContent(s);
+        onFileLoadSuccess?.(f.name);
     };
 
-    const loadDefaults = async (keyToLoad?: string) => {
+    const loadDefaults = async (
+        keyToLoad?: string,
+        onFileLoadSuccess?: (filename: string) => void
+    ) => {
         const assetBasePath = import.meta.env.DEV
             ? "/"
             : import.meta.env.BASE_URL;
@@ -74,6 +87,7 @@ export function useControlMapper() {
         const file = parseBindingFile(text, selectedOption.filename);
         setFile(file);
         setDefaultsKey(targetKey);
+        onFileLoadSuccess?.(selectedOption.filename);
     };
 
     const setGroup = (g: Partial<BindingGroup>, i: number) => {
@@ -182,5 +196,6 @@ export function useControlMapper() {
         aliases,
         downloadUrl,
         fileInputRef,
+        originalFileContent,
     };
 }
