@@ -59,12 +59,19 @@ export interface ModifySettingsSectionProps {
     setBindingValue: (
         type: CodeType,
         value: BindingValue,
-        bindingIndex: number
+        bindingIndex: number,
+        groupIndex: number
     ) => void;
     setRemappable: (
         type: CodeType,
         checked: boolean,
-        bindingIndex: number
+        bindingIndex: number,
+        groupIndex: number
     ) => void;
-    setFlagBit: (bit: number, checked: boolean, bindingIndex: number) => void;
+    setFlagBit: (
+        bit: number,
+        checked: boolean,
+        bindingIndex: number,
+        groupIndex: number
+    ) => void;
 }

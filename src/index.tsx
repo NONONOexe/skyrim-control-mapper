@@ -3,6 +3,7 @@ import { useControlMapper } from "./hooks/useControlMapper";
 import { UploadControlmapSection } from "./components/UploadControlmapSection";
 import { ModifySettingsSection } from "./components/ModifySettingsSection";
 import { DownloadControlmapSection } from "./components/DownloadControlmapSection";
+import Header from "./components/Header";
 
 function App() {
     const {
@@ -22,7 +23,8 @@ function App() {
     } = useControlMapper();
 
     return (
-        <>
+        <div style={{ paddingTop: "50px" }}>
+            <Header />
             <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
                 <h2>1. Upload Configuration File / Select Default Data</h2>
                 <UploadControlmapSection
@@ -62,7 +64,7 @@ function App() {
                     </div>
                 </>
             ) : null}
-        </>
+        </div>
     );
 }
 
