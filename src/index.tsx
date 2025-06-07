@@ -11,7 +11,16 @@ import { DownloadControlmapSection } from "./components/DownloadControlmapSectio
 import { useControlMapper } from "./hooks/useControlMapper";
 
 const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#555",
+        },
+    },
     typography: {
+        h1: {
+            fontSize: "1.35rem",
+            fontWeight: 600,
+        },
         h3: {
             fontSize: "1.2rem",
             fontWeight: 600,
