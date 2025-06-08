@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -9,25 +9,7 @@ import { UploadControlmapSection } from "./components/UploadControlmapSection";
 import { ModifySettingsSection } from "./components/ModifySettingsSection";
 import { DownloadControlmapSection } from "./components/DownloadControlmapSection";
 import { useControlMapper } from "./hooks/useControlMapper";
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#555",
-        },
-    },
-    typography: {
-        h1: {
-            fontSize: "1.35rem",
-            fontWeight: 600,
-        },
-        h3: {
-            fontSize: "1.2rem",
-            fontWeight: 600,
-            color: "#555",
-        },
-    },
-});
+import { theme } from "./constants/theme";
 
 function App() {
     const [openSnackbar, setOpenSnackbar] = React.useState(false);
