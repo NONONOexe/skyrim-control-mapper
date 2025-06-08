@@ -1,15 +1,12 @@
-import React from "react";
-import { BindingValue } from "../types";
-import { codes } from "../constants/inputCodes";
-import { parseNumber } from "../utils/parseUtils";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Box from "@mui/material/Box";
+import { CodeInputCell } from "./CodeInputCell";
+import { BindingValue } from "../types";
 
 export function BindingValueCell({
     v,
@@ -122,30 +119,11 @@ export function BindingValueCell({
                 </Select>
             </FormControl>
             {v.type === "code" ? (
-                <FormControl
-                    variant="standard"
-                    sx={{
-                        minWidth: 0,
-                        whiteSpace: "nowrap",
-                        marginRight: 1,
-                        flexShrink: 1,
-                        flexGrow: 0,
-                    }}
-                >
-                    <Select
-                        value={String(v.code)}
-                        onChange={(e: SelectChangeEvent<string>) =>
-                            onChangeCode(parseNumber(e.target.value as string))
-                        }
-                        sx={{ minWidth: 0 }}
-                    >
-                        {Object.entries(codes[type]).map(([key, value]) => (
-                            <MenuItem value={String(value)} key={value}>
-                                {key}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                <CodeInputCell
+                    value={v.code!}
+                    type={type}
+                    onChange={onChangeCode}
+                />
             ) : null}
             {v.type === "alias" ? (
                 <FormControl
