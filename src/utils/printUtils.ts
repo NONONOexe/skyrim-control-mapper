@@ -1,9 +1,9 @@
 import { BindingFile, BindingGroup, BindingValue, Binding } from "../types";
-import { standardFileHeader } from "../constants";
+import { STANDARD_FILE_HEADER } from "../constants";
 
 export function printBindingFile(file: BindingFile) {
     return (
-        standardFileHeader +
+        STANDARD_FILE_HEADER +
         file.groups.flatMap((g) => printBindingGroup(g)).join("\r\n")
     );
 }
