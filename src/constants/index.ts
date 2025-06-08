@@ -186,7 +186,7 @@ export const codes = {
     gamepad: gamepadCodes,
 };
 
-export const standardFileHeader = `// 1st field: User event name.  DO NOT ALTER!  This field is used to ID events in the code							
+export const STANDARD_FILE_HEADER = `// 1st field: User event name.  DO NOT ALTER!  This field is used to ID events in the code							
 // 2nd: Keyboard key ID that will proc this event.  A value of 0xff means the event is unmapped for this device.							
 // 3rd: Mouse button ID that will proc this event.							
 // 4th: Gamepad button ID that will proc this event.							
