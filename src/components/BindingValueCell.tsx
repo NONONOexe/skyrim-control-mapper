@@ -1,6 +1,6 @@
 import React from "react";
 import { BindingValue } from "../types";
-import { codes } from "../constants";
+import { codes } from "../constants/inputCodes";
 import { parseNumber } from "../utils/parseUtils";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
