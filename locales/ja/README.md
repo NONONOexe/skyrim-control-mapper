@@ -38,17 +38,17 @@ Skyrimでは、ゲーム内のオプションでキー設定ができますが�
 1. **設定ファイルの読み込み**:
    コピーしておいた`controlmap.txt`をアップロードします。または、適用先のSkyrimのバージョンに合わせたデフォルト設定を選択して読み込むこともできます（バージョン1.6.640以降は「新バージョン」、それ以前は「旧バージョン」を選択してください）。
 
-    ![設定ファイルの読み込み](images/load-config.png)
+    ![設定ファイルの読み込み](https://github.com/NONONOexe/skyrim-control-mapper/blob/main/images/load-config.png)
 
 2. **キーマッピングの編集**:
    表示された操作項目に対して、ゲームパッド、キーボード、マウスのキーを割り当ててください。複数のキーを割り当てることもできます。
 
-    ![キーマッピングの編集](images/edit-mapping.png)
+    ![キーマッピングの編集](https://github.com/NONONOexe/skyrim-control-mapper/blob/main/images/edit-mapping.png)
 
 3. **設定ファイルのダウンロード**:
    編集が完了したら、ボタンをクリックして、編集後の`controlmap.txt`ファイルをダウンロードしてください。
 
-    ![設定ファイルのダウンロード](images/download-config.png)
+    ![設定ファイルのダウンロード](https://github.com/NONONOexe/skyrim-control-mapper/blob/main/images/download-config.png)
 
 ### ステップ 3: ゲームへの適用
 
@@ -73,4 +73,4 @@ Skyrimでは、ゲーム内のオプションでキー設定ができますが�
 
 ## ライセンス
 
-本アプリケーションはMITライセンスのもとで公開されています。詳細については、リポジトリに含まれる[LICENSEファイル](LICENSE)をご確認ください。
+本アプリケーションはMITライセンスのもとで公開されています。詳細については、リポジトリに含まれる[LICENSEファイル](https://github.com/NONONOexe/skyrim-control-mapper/blob/main/LICENSE)をご確認ください。
