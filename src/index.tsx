@@ -10,6 +10,7 @@ import { ModifySettingsSection } from "./components/ModifySettingsSection";
 import { DownloadControlmapSection } from "./components/DownloadControlmapSection";
 import { useControlMapper } from "./hooks/useControlMapper";
 import { theme } from "./constants/theme";
+import { SNACKBAR_AUTO_HIDE_DURATION } from "./constants/app";
 
 function App() {
     const [openSnackbar, setOpenSnackbar] = React.useState(false);
@@ -79,7 +80,7 @@ function App() {
             </Stack>
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={6000}
+                autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
