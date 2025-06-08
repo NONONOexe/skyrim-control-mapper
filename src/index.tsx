@@ -11,24 +11,18 @@ import { DownloadControlmapSection } from "./components/DownloadControlmapSectio
 import { useControlMapper } from "./hooks/useControlMapper";
 import { theme } from "./constants/theme";
 import { SNACKBAR_AUTO_HIDE_DURATION } from "./constants/app";
+import { useSnackbar } from "./hooks/useSnackbar";
 
 function App() {
-    const [openSnackbar, setOpenSnackbar] = React.useState(false);
-    const [snackbarMessage, setSnackbarMessage] = React.useState("");
-
-    const handleCloseSnackbar = (
-        _event?: React.SyntheticEvent | Event,
-        reason?: string
-    ) => {
-        if (reason === "clickaway") {
-            return;
-        }
-        setOpenSnackbar(false);
-    };
+    const {
+        openSnackbar,
+        snackbarMessage,
+        handleOpenSnackbar,
+        handleCloseSnackbar,
+    } = useSnackbar();
 
     const onFileLoadSuccess = (filename: string) => {
-        setSnackbarMessage(`${filename} loaded successfully.`);
-        setOpenSnackbar(true);
+        handleOpenSnackbar(`${filename} loaded successfully.`);
     };
 
     const {
