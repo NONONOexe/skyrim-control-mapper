@@ -38,11 +38,17 @@ Access [Skyrim Control Mapper](https://nononoexe.github.io/skyrim-control-mapper
 1. **Load the configuration file**:
    Upload the `controlmap.txt` file you copied. Alternatively, you can select and load default settings matching your target Skyrim version (select "New Version" for version 1.6.640 and later, and "Old Version" for earlier versions).
 
+    ![Load the configuration file](images/load-config.png)
+
 2. **Edit the key mapping**:
    Assign gamepad, keyboard, or mouse keys to the displayed action items. You can also assign multiple keys.
 
+    ![Edit the key mapping](images/edit-mapping.png)
+
 3. **Download the configuration file**:
    Once editing is complete, click the button to download the edited `controlmap.txt` file.
+
+    ![Download the configuration file](images/download-config.png)
 
 ### Step 3: Applying to the Game
 
