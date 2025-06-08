@@ -1,26 +1,42 @@
 {
-  "name": "skyrim-control-mapper",
-  "version": "1.0.0",
-  "description": "Visual editor for Skyrim SE controlmap.txt files",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Hawkbar",
-  "license": "MIT",
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.15.29",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.5.1",
-    "typescript": "^5.3.3",
-    "vite": "^6.3.5",
-    "vite-plugin-pwa": "^1.0.0"
-  }
+    "name": "skyrim-control-mapper",
+    "version": "1.0.0",
+    "description": "Visual editor for Skyrim SE controlmap.txt files",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{ts,tsx,js,jsx,json,css,html,yaml,yml,md}": [
+            "prettier --write"
+        ]
+    },
+    "author": "Hawkbar",
+    "license": "MIT",
+    "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@mui/icons-material": "^7.1.1",
+        "@mui/material": "^7.1.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.15.29",
+        "@types/react": "^19.1.6",
+        "@types/react-dom": "^19.1.6",
+        "@vitejs/plugin-react": "^4.5.1",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.4.1",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.0",
+        "typescript": "^5.3.3",
+        "vite": "^6.3.5",
+        "vite-plugin-pwa": "^1.0.0"
+    }
 }
