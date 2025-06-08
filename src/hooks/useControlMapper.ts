@@ -12,7 +12,7 @@ import {
     LOCAL_STORAGE_KEY,
     DEFAULT_NEW_FORMAT_OPTION,
     DEFAULT_OLD_FORMAT_OPTION,
-} from "../constants";
+} from "../constants/app";
 import { printBindingFile } from "../utils/printUtils";
 
 export function useControlMapper() {

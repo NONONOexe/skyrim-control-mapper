@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { DownloadControlmapSectionProps } from "../types";
 import { ModifiedFileViewer } from "./ModifiedFileViewer";
-import { DOWNLOAD_BUTTON_TEXT } from "../constants";
+import { DOWNLOAD_BUTTON_TEXT } from "../constants/app";
 
 export const DownloadControlmapSection: React.FC<
     DownloadControlmapSectionProps

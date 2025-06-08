@@ -1,9 +1,9 @@
 import { BindingFile, BindingGroup, BindingValue, Binding } from "../types";
-import { STANDARD_FILE_HEADER } from "../constants";
+import { FILE_HEADER } from "../constants/controlmap";
 
 export function printBindingFile(file: BindingFile) {
     return (
-        STANDARD_FILE_HEADER +
+        FILE_HEADER +
         file.groups.flatMap((g) => printBindingGroup(g)).join("\r\n")
     );
 }

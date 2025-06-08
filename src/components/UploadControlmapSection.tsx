@@ -5,7 +5,7 @@ import { LoadFormatButton } from "./LoadFormatButton";
 import {
     DEFAULT_NEW_FORMAT_OPTION,
     DEFAULT_OLD_FORMAT_OPTION,
-} from "../constants";
+} from "../constants/app";
 import { UploadControlmapSectionProps } from "../types";
 import Stack from "@mui/material/Stack";
 

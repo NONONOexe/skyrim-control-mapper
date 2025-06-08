@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
-import { UPLOAD_BUTTON_TEXT } from "../constants";
+import { UPLOAD_BUTTON_TEXT } from "../constants/app";
 
 const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
