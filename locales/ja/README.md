@@ -2,7 +2,7 @@
 
 ## 概要
 
-[English README / 英語版はこちら](README.md)
+[English README / 英語版はこちら](https://github.com/NONONOexe/skyrim-control-mapper/blob/main/README.md)
 
 Skyrim Control Mapperは「The Elder Scrolls V: Skyrim」のキーマッピングをGUIで簡単に編集できるウェブアプリケーションです。
 
