@@ -1,6 +1,6 @@
 {
     "name": "skyrim-control-mapper",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Visual editor for Skyrim SE controlmap.txt files",
     "main": "index.js",
     "scripts": {
